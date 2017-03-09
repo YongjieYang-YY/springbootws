@@ -55,7 +55,10 @@ public class SampleWsApplicationTests {
 
     @Before
     public void setUp() {
-        this.webServiceTemplate.setDefaultUri("http://localhost:" + this.serverPort + "/Service/Hello");
+        System.setProperty("javax.net.ssl.trustStorePassword", "123");
+        String storePath = getClass().getResource("/localhost.jks").getPath();
+        System.setProperty("javax.net.ssl.trustStore", storePath);
+        this.webServiceTemplate.setDefaultUri("https://localhost:" + this.serverPort + "/Service/Hello");
     }
 
     @Test
