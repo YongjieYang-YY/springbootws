@@ -27,12 +27,11 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.rule.OutputCapture;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
 import static org.hamcrest.Matchers.containsString;
@@ -76,6 +75,13 @@ public class SampleWsApplicationTests {
                         + "<ns2:sayHelloResponse xmlns:ns2=\"http://service.ws.sample/\">"
                         + "<return>Hello, Welcome to CXF Spring boot Elan!!!</return>"
                         + "</ns2:sayHelloResponse>"));
+    }
+
+    @Test
+    public void testHelloRest() {
+        RestTemplate client = new RestTemplate();
+        String result = client.getForObject("https://localhost:" + this.serverPort + "/Service/rest/Hello/sayHello/Elan", String.class);
+        assertThat(result, containsString("Hello, Welcome to CXF Spring boot Elan!!!"));
     }
 
 }

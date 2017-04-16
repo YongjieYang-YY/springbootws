@@ -1,0 +1,14 @@
+cxf:
+  path: /Service
+  jaxrs:
+    component-scan: true
+    classes-scan-packages: com.chenhm.springdemo.ws
+    server.address: /rest
+
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: 123456
+    keyStoreType: PKCS12
+    keyAlias: localhost

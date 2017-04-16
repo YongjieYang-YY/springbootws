@@ -18,6 +18,9 @@
  */
 package com.chenhm.springdemo.ws.service;
 
+import org.springframework.stereotype.Service;
+
+import javax.jws.WebService;
 import java.util.logging.Logger;
 
 /**
@@ -26,22 +29,19 @@ import java.util.logging.Logger;
  * 3.1.0 2015-05-18T13:02:03.098-05:00 Generated source version: 3.1.0
  */
 
-@javax.jws.WebService(serviceName = "HelloService", portName = "HelloPort",
-        targetNamespace = "http://service.ws.sample/",
-        endpointInterface = "com.chenhm.springdemo.ws.service.Hello")
+@Service
+@WebService(serviceName = "HelloService", portName = "HelloPort")
 public class HelloPortImpl implements Hello {
 
     private static final Logger LOG = Logger.getLogger(HelloPortImpl.class.getName());
 
-    public java.lang.String sayHello(java.lang.String myname) {
+    public String sayHello(String myname) {
         LOG.info("Executing operation sayHello" + myname);
         try {
             return "Hello, Welcome to CXF Spring boot " + myname + "!!!";
-
         } catch (java.lang.Exception ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex);
         }
     }
-
 }

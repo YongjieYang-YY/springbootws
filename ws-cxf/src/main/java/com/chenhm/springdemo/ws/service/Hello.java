@@ -22,6 +22,11 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 
@@ -31,8 +36,8 @@ import javax.xml.ws.ResponseWrapper;
  * 2015-05-18T13:02:03.098-05:00 Generated source version: 3.1.0
  */
 @WebService(targetNamespace = "http://service.ws.sample/", name = "Hello")
+@Path("/Hello")
 public interface Hello {
-
     @WebResult(name = "return", targetNamespace = "")
     @RequestWrapper(localName = "sayHello",
             targetNamespace = "http://service.ws.sample/",
@@ -41,5 +46,8 @@ public interface Hello {
     @ResponseWrapper(localName = "sayHelloResponse",
             targetNamespace = "http://service.ws.sample/",
             className = "sample.ws.service.SayHelloResponse")
-    String sayHello(@WebParam(name = "myname", targetNamespace = "") String myname);
+    @Path("/sayHello/{name}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @GET
+    String sayHello(@WebParam(name = "myname", targetNamespace = "") @PathParam("name") String myname);
 }
