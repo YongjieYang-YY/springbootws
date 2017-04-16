@@ -34,5 +34,6 @@
     <modules>
 		<module>ws-cxf</module>
 		<module>ws-client-axis2</module>
+        <module>rs-client-cxf</module>
 	</modules>
 </project>
